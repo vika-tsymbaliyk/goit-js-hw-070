@@ -6,6 +6,7 @@ console.log(galleryItems);
 const list = document.querySelector('.gallery');
 const listContent = generateGalleryList(galleryItems);
 
+list.insertAdjacentHTML("beforeend", listContent);
 
 function generateGalleryList(galleryItems) {
     return galleryItems.flatMap((image) => `<li class="gallery__item">
@@ -13,14 +14,29 @@ function generateGalleryList(galleryItems) {
     <img
       class="gallery__image"
       src=${image.preview}
-      data-source="large-image.jpg"
+      data-source="${image.original}"
       alt="${image.description}"
     />
   </a>
 </li>`)
   .join("");
 }
-list.insertAdjacentHTML("beforeend", listContent);
+
+function handlerImageClick(event) {
+    event.preventDefault();
+   
+    if (!event.target.classList.contains('gallery__image')) {
+        return
+    };
+    const largeImageUrl = event.target.dataset.source;
+    // basicLightbox.create(`
+	// 	<img width="1400" height="900" src=${largeImageUrl}>
+	// `).show()
+
+}
+list.addEventListener("click", handlerImageClick)
+
+
 
 
 
