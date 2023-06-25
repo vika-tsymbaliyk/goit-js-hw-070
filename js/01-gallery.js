@@ -1,7 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-
-console.log(galleryItems);
+import * as basicLightbox from 'basiclightbox';
 
 const list = document.querySelector('.gallery');
 const listContent = generateGalleryList(galleryItems);
@@ -29,9 +28,9 @@ function handlerImageClick(event) {
         return
     };
     const largeImageUrl = event.target.dataset.source;
-    // basicLightbox.create(`
-	// 	<img width="1400" height="900" src=${largeImageUrl}>
-	// `).show()
+    const instance = basicLightbox.create(`<img src="${largeImageUrl}" width="1400" height="900">`)
+  instance.show()
+  console.log(largeImageUrl);
 
 }
 list.addEventListener("click", handlerImageClick)
